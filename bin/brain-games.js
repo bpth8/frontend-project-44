@@ -1,1 +1,5 @@
-Welcome to the Brain Games!
+#!/usr/bin/env node
+
+import userName from '../src/cli.js';
+
+userName();
