@@ -16,13 +16,16 @@ const gamePlay = () => {
   const user = userName();
   console.log('Answer "yes" if the number is even, otherwise answer "no".');
   let correctAnswers = 0;
+
   while (correctAnswers < 3) {
     const randomNumber = getRandomNumber();
     const correctAnswer = isEven(randomNumber) ? 'yes' : 'no';
     const userAnswer = readlineSync.question(`Question: ${randomNumber}\nYour answer: `);
+
     if (userAnswer !== correctAnswer) {
       console.log(`'${userAnswer}' is wrong answer ;(. Correct answer was '${correctAnswer}'.`);
       console.log(`Let's try again, ${user}!`);
+      return;
     }
 
     console.log('Correct!');
