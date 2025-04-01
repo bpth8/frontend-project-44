@@ -9,7 +9,8 @@
   },
   "bin": {
     "brain-games": "bin/brain-games.js",
-    "brain-even": "bin/brain-even.js"
+    "brain-even": "bin/brain-even.js",
+    "brain-calc": "bin/brain-calc.js"
   },
   "repository": {
     "url": "git+https://github.com/bpth8/frontend-project-44.git"
@@ -19,5 +20,8 @@
   "bugs": {
     "url": "https://github.com/bpth8/frontend-project-44/issues"
   },
-  "homepage": "https://github.com/bpth8/frontend-project-44#readme"
+  "homepage": "https://github.com/bpth8/frontend-project-44#readme",
+  "devDependencies": {
+    "npm": "^11.2.0"
+  }
 }
