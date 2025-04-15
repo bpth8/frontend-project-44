@@ -1,5 +1,3 @@
-// prime.js
-
 // eslint-disable-next-line import/extensions
 import runEngine from '../index.js';
 

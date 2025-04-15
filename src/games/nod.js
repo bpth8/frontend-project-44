@@ -1,44 +1,26 @@
-// eslint-disable-next-line import/no-extraneous-dependencies
-import readlineSync from 'readline-sync';
 // eslint-disable-next-line import/extensions
-import welcomeUser from '../cli.js';
+import runEngine from '../index.js';
 
-const gcd = (a, b) => {
-  while (b !== 0) {
-    const temp = b;
+const getGCD = (a, b) => {
+  while (b) {
     // eslint-disable-next-line no-param-reassign
-    b = a % b;
-    // eslint-disable-next-line no-param-reassign
-    a = temp;
+    [a, b] = [b, a % b];
   }
   return a;
 };
 
-const getRandomNumber = () => Math.floor(Math.random() * 100);
+const generateRound = () => {
+  const num1 = Math.floor(Math.random() * 100) + 1;
+  const num2 = Math.floor(Math.random() * 100) + 1;
 
-const gamePlayNod = () => {
-  const user = welcomeUser();
-  console.log('Find the greatest common divisor of given numbers.');
+  const question = `${num1} ${num2}`;
+  const correctAnswer = getGCD(num1, num2).toString();
 
-  let correctAnswers = 0;
-
-  while (correctAnswers < 3) {
-    const num1 = getRandomNumber();
-    const num2 = getRandomNumber();
-    const correctAnswer = gcd(num1, num2);
-    const userAnswer = readlineSync.question(`Question: ${num1} ${num2}\nYour answer: `);
-
-    if (Number(userAnswer) !== correctAnswer) {
-      console.log(`'${userAnswer}' is wrong answer ;(. Correct answer was '${correctAnswer}'.`);
-      console.log(`Let's try again, ${user}!`);
-      return;
-    }
-
-    console.log('Correct!');
-    correctAnswers += 1;
-  }
-
-  console.log(`Congratulations, ${user}!`);
+  return [question, correctAnswer];
 };
 
-export default gamePlayNod;
+const rules = 'Find the greatest common divisor of given numbers.';
+
+export default function gamePlayNod() {
+  runEngine(rules, generateRound);
+}

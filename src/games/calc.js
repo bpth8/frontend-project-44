@@ -1,29 +1,39 @@
-// eslint-disable-next-line import/no-extraneous-dependencies
-import readlineSync from 'readline-sync';
 // eslint-disable-next-line import/extensions
-import welcomeUser from '../cli.js';
+import runEngine from '../index.js';
 
-const gamePlayCalc = (generateQuestion) => {
-  const user = welcomeUser();
-  console.log('What is the result of the expression?');
+const getRandomNumber = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
+const generateRound = () => {
+  const operations = ['+', '-', '*'];
 
-  let correctAnswers = 0;
+  const operation = operations[getRandomNumber(0, operations.length - 1)];
+  const num1 = getRandomNumber(1, 20);
+  const num2 = getRandomNumber(1, 20);
 
-  while (correctAnswers < 3) {
-    const { question, correctAnswer } = generateQuestion();
-    const userAnswer = readlineSync.question(`Question: ${question}\nYour answer: `);
+  let question;
+  let correctAnswer;
 
-    if (userAnswer !== correctAnswer) {
-      console.log(`'${userAnswer}' is wrong answer ;(. Correct answer was '${correctAnswer}'.`);
-      console.log(`Let's try again, ${user}!`);
-      return;
-    }
-
-    console.log('Correct!');
-    correctAnswers += 1;
+  switch (operation) {
+    case '+':
+      question = `${num1} + ${num2}`;
+      correctAnswer = (num1 + num2).toString();
+      break;
+    case '-':
+      question = `${num1} - ${num2}`;
+      correctAnswer = (num1 - num2).toString();
+      break;
+    case '*':
+      question = `${num1} * ${num2}`;
+      correctAnswer = (num1 * num2).toString();
+      break;
+    default:
+      break;
   }
 
-  console.log(`Congratulations, ${user}!`);
+  return [question, correctAnswer];
 };
 
-export default gamePlayCalc;
+const rules = 'What is the result of the expression?';
+
+export default function gamePlayCalc() {
+  runEngine(rules, generateRound);
+}
